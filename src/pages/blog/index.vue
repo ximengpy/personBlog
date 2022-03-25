@@ -22,7 +22,7 @@
                 class="info-com"
                 >
                   <img src="../../assets/images/qq.png" alt="qq" class="qq" width="100%">
-                <el-button slot="reference">QQ</el-button>
+                <!-- <el-button slot="reference">QQ</el-button> -->
               </el-popover>
               <el-popover
                 placement="top-start"
@@ -31,7 +31,7 @@
                 class="info-com"
                 >
                   <img src="../../assets/images/core.png" alt="qq" class="wx" width="100%">
-              <el-button slot="reference">微信</el-button>
+              <!-- <el-button slot="reference">微信</el-button> -->
               </el-popover>
             </div>
           </div>
@@ -70,7 +70,7 @@
             <ul class="hot-list">
               <li v-for="(item,index) in articleHot" :key="index" class="hot-item">
                 <i>{{index+1}}</i>
-                <router-link class="hot-a"  :to="/article/+item._id">{{item.title}}</router-link>
+                <router-link class="hot-a"  :to="/blog/+item._id">{{item.title}}</router-link>
               </li>
             </ul>
           </div>

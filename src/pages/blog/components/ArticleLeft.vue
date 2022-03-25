@@ -10,16 +10,13 @@
         <span class="month">{{item.date.slice(5, 7) }} <span>月</span> </span>
         <span class="year">{{item.date.slice(8, 10)}}日</span>
       </div>
-      <div class="content" >
-        <!-- <router-link :to="/article/+item._id" :style="{backgroundImage: 'url('+item.surface+')'}">
-          <i></i>
-        </router-link> -->
-        <!-- <router-link :to="/article/+item._id" class="content-title" v-html="item.content" >
+      <div class="content mgb_20" >
+        <router-link :to="/blog/+item._id" class="content-title ellipsis_2" >
           {{item.content}}
-        </router-link> -->
+        </router-link>
       </div>
       <div class="read-more">
-        <!-- <router-link :to="/article/+item._id">继续阅读</router-link> -->
+        <router-link :to="/blog/+item._id">继续阅读</router-link>
       </div>
       <div class="bottom">
         <div class="fl">
@@ -78,6 +75,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "@/styles/index.scss";
 .article-left {
     > section {
       overflow: hidden;
@@ -167,10 +165,6 @@ export default {
         margin-top: 20px;
         line-height: 20px;
         & .content-title {
-          display: inline-block;
-          height: 102px;
-          text-overflow:ellipsis;
-          overflow:hidden;
           text-indent: 20px;
           transition: all .2s;
         }
