@@ -1,6 +1,6 @@
 // 类型提示用（运行时不会引用）
 import axios from 'axios';
-import Message from 'element-plus';
+import ElMessage from 'element-plus';
 import config from './config';
 // import { getToken } from './authorization';
 // import { restUserLoginInfo } from '@/api/login';
@@ -60,31 +60,31 @@ service.interceptors.request.use(async options => {
 function responseTip(status, info, showTip) {
   switch (status) {
     case 404:
-      Message.error(`接口不存在`);
+      ElMessage.error(`接口不存在`);
       break;
   
     case 401:
-      Message.error(`登陆已过期，请重新登陆`);
+      ElMessage.error(`登陆已过期，请重新登陆`);
       break;
 
     case 400:
-      Message.error(`请求的参数有误`);
+      ElMessage.error(`请求的参数有误`);
       break;
 
     case 301:
     case 302:
-      Message.info(`请求已被重定向`);
+      ElMessage.info(`请求已被重定向`);
       break;
 
     case 200:
       if (info.code !== 0) {
-        Message.warning("操作失败")
+        ElMessage.warning("操作失败")
       }
       break;
   }
 
   if (status >= 500) {
-    Message.error(`服务器出错了`);
+    ElMessage.error(`服务器出错了`);
   }
 }
 
@@ -108,11 +108,11 @@ service.interceptors.response.use(res => {
     const tips = tip.split(sign);
     responseTip(parseInt(tips[1]), { code: -1 });
   } else if (tip.includes('timeout')) {
-    Message.warning(`网络响应超时了`);
+    ElMessage.warning(`网络响应超时了`);
   } else if (tip.includes('Network Error')) {
-    Message.warning(`网络出错了`);
+    ElMessage.warning(`网络出错了`);
   } else {
-    Message.warning(`${error}`);
+    ElMessage.warning(`${error}`);
     console.warn('--------------------------------');
     console.warn('响应拦截器异常处理 >>', error);
     console.warn('--------------------------------');

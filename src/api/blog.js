@@ -14,3 +14,19 @@ export function getVisitor() {
 export function getArticleList(data) {
   return request('POST', '/article/getshow', data)
 }
+
+
+//获取文章详情
+export function getArticle(_id) {
+  return request('POST', '/article', {_id})
+}
+
+//获取延伸阅读
+export function getArticleExtend() {
+  return request('POST', '/article/extend')
+}
+
+//给文章点赞
+export function articleLike(_id) {
+  return request('POST', '/article/like', {_id})
+}

@@ -604,3 +604,11 @@ export function useYearOptions(len = 5) {
   }
   return options
 }
+
+/**
+ * 字符串裁剪
+ */
+export function sliceStr(str, start, end) {
+  if( !str) return ''
+  return str.slice(start, end) || ''
+}
