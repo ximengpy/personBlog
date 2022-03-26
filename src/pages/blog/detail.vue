@@ -78,7 +78,9 @@ export default {
     sliceStr,
     init() {
       this.id = this.$route.params.id
-      this._getArticle()
+      if( this.id) {
+        this._getArticle()
+      }
     },
 
     // ==================================== 二、数据请求类 ================================

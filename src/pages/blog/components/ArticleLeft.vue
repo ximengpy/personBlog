@@ -1,5 +1,5 @@
 <template>
-  <div class="article-left">
+  <div class="article-left" v-if="list.length">
     <section class="article-list" v-for="(item,index) in list " :key="index">
       <h5>
         <span>【{{item.type}}】</span>
@@ -37,6 +37,7 @@
     </section>
     <Pagination :pageInfo ="pages" @change="$emit('change')" />
   </div>
+  <el-empty v-else description="暂无数据" />
 </template>
 <script>
 import Pagination from '../../../components/Pagination/index.vue'

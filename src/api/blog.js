@@ -30,3 +30,8 @@ export function getArticleExtend() {
 export function articleLike(_id) {
   return request('POST', '/article/like', {_id})
 }
+
+//模糊查询
+export function getKeywords(keywords) {
+  return request('POST', '/article/search', {keywords})
+}

@@ -196,7 +196,7 @@ export default {
         text-align: center;
         cursor: pointer;
         z-index: 111;
-         :hover {
+        &:hover {
           background-color: #6bc30d ;
         }
       }

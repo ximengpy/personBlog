@@ -39,6 +39,7 @@
             <div class="search-main">
               <input
                 @input="handleInput"
+                @blur="onBlur"
                 v-model="searchInput"
                 placeholder="请输入内容">
               <i class="el-icon-search"></i>
@@ -48,7 +49,7 @@
                   :key="index"
                   class="search-item"
                 >
-                  <!-- <router-link :to="'/Article/'+item._id">{{item.title}}</router-link> -->
+                  <router-link :to="`/blog/${item._id}`">{{item.title}}</router-link>
                 </li>
               </ul>
             </div>
@@ -58,8 +59,7 @@
                   class="search-item"
                   v-for="(item,index) in articleTags"
                   :key="index"
-                  @mouseenter="handleMouseEnter(index)"
-                  @click="_getArticleList(item)"
+                  @click="gitInit(item)"
                 > {{ item.tag}}</li>
               </ul>
               <!-- <div class="cover" :style="{top:coverTop*40+'px'}"></div> -->
@@ -91,7 +91,7 @@
 <script>
 import { getArticleHot } from '@/api/home'
 import { usePageInfo } from '@/utils/hook'
-import { getArticleList, getArticleTag, getVisitor } from '../../api/blog' 
+import { getArticleList, getArticleTag, getKeywords, getVisitor } from '../../api/blog' 
 import ArticleLeft from './components/ArticleLeft.vue'
 export default {
   components:{ArticleLeft},
@@ -119,7 +119,24 @@ export default {
     handleMouseEnter() {
 
     },
+    
+    gitInit(item) {
+      this.pages.currentPage = 1
+      this._getArticleList(item)
+
+    },
+    //失去焦点隐藏列表
+    onBlur() {
+      this.searchList = []
+    },
     // ==================================== 二、数据请求类 ================================
+    async handleInput() {
+      if( !this.searchInput) { return }
+      const res = await getKeywords(this.searchInput)
+      if( !res.code) {
+        this.searchList = res.data
+      }
+    },
     async _articleHot() {
       const res = await getArticleHot()
       if( !res.code) {
@@ -341,24 +358,34 @@ export default {
                 padding: 0 30px;
                 color: #787977;
                 border-bottom: 1px #eee dotted;
-                &::after {
+                cursor: pointer;
+                &:after {
                   position: absolute;
                   right: 0;
                   width: 10px;
                   height: 40px;
+                  opacity: 0;
+                  content: '';
                   border-right: 5px solid #000;
                   background-color: rgba(0,0,0,.05);
-                  transition:top .2s;
+                  transition: all .4s;
+
+                }
+                &:hover {
+                  &::after {
+                    opacity: 1;
+                  }
                 }
               }
             }
-            .cover {
-              
-              left: 0;
-              top: 0;
-              box-sizing: border-box;
-             
-            }
+            // .cover {
+            //   position: absolute;
+            //   height: 40px;
+            //   border-right: 5px solid #000;
+            //   background-color: rgba(0,0,0,.05);
+            //   transition:top .2s;
+            //   box-sizing: border-box;
+            // }
           }
         }
         .hot{
