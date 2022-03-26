@@ -1,6 +1,6 @@
 // 类型提示用（运行时不会引用）
 import axios from 'axios';
-import ElMessage from 'element-plus';
+import {ElMessage} from 'element-plus';
 import config from './config';
 // import { getToken } from './authorization';
 // import { restUserLoginInfo } from '@/api/login';
@@ -78,7 +78,7 @@ function responseTip(status, info, showTip) {
 
     case 200:
       if (info.code !== 0) {
-        ElMessage.warning("操作失败")
+        ElMessage.warning(info.msg || "操作失败")
       }
       break;
   }

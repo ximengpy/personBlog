@@ -35,6 +35,11 @@ const routers = [
     path: '/diary',
     component: () => import('../pages/diary/index.vue')
   },
+  {
+    name: 'login',
+    path: '/login',
+    component: () => import('../pages/login/index.vue')
+  },
 ]
 const router = createRouter({
     history: createWebHashHistory(),
