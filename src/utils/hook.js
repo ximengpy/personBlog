@@ -29,7 +29,7 @@ export function useNavList() {
       title: '留言'
     },
     {
-      path: '/dialy',
+      path: '/diary',
       title: '日记'
     },
     {

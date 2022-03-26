@@ -30,6 +30,11 @@ const routers = [
     path: '/about',
     component: () => import('../pages/about/index.vue')
   },
+  {
+    name: 'diary',
+    path: '/diary',
+    component: () => import('../pages/diary/index.vue')
+  },
 ]
 const router = createRouter({
     history: createWebHashHistory(),
