@@ -24,7 +24,12 @@ const routers = [
     name: 'worksDetail',
     path: '/works/:id',
     component: () => import('../pages/works/detail.vue')
-  }
+  },
+  {
+    name: 'about',
+    path: '/about',
+    component: () => import('../pages/about/index.vue')
+  },
 ]
 const router = createRouter({
     history: createWebHashHistory(),
