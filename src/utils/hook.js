@@ -33,7 +33,7 @@ export function useNavList() {
       title: '日记'
     },
     {
-      path: '/work',
+      path: '/works',
       title: '个人作品'
     },
     // {

@@ -91,7 +91,6 @@ export default {
       hoverChild: {},
       /** 是否滚动超过顶部高度 */
       isScroll: false,
-      isMounted: false
     }
   },
   computed: {
@@ -135,12 +134,10 @@ export default {
     }
   },
   mounted() {
-    this.isMounted = true;
     this.isLogin = false
     const THAT = this;
     function onScroll() {
       const rootNode = document.body.scrollTop === 0 ? document.documentElement : document.body;
-      // console.log(rootNode.scrollTop);
       THAT.isScroll = rootNode.scrollTop > 70 + 17; // 17为滚动条的厚度
     }
     onScroll(); // 一开始要先执行，因为有可能一开始就处于页面非顶部
@@ -171,11 +168,9 @@ export default {
         this.hoverChild = {};
         this.showChildMenu = false;
       }
-      // console.log('enter');
     },
     onLeave() {
       this.showChildMenu = false;
-      // console.log('leave');
     }
     // ==================================== 二、数据请求类 ================================
 
