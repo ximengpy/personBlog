@@ -204,8 +204,8 @@ export default {
   .menu {
     .btn {
       position: fixed;
-      top: 35px;
-      right: 35px;
+      top: 65px;
+      right: 45px;
       width: 40px;
       height: 40px;
       padding-top: 10px;

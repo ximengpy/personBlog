@@ -13,7 +13,7 @@
             <a class="fvertical" href="javascript:void(0)" v-else>{{ item.title }}</a>
           </div>
         </div>
-        <div class="flex">
+        <div class="flex mgr_40">
           <!-- <a class="nav-option-text fcc" :href="doctorCloud" target="_blank">博士云</a> -->
           <router-link class="nav-option-btn fcc" to="/platform" v-show="isLogin">进入后台</router-link>
           <router-link class="nav-option-text fcc" to="/login" v-show="!isLogin">登录</router-link>
