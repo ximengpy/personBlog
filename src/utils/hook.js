@@ -13,3 +13,37 @@ export function usePageInfo(size = 10) {
     total: 0
   }
 }
+
+export function useNavList() {
+  const list = [
+    {
+      path: '/',
+      title: '首页'
+    },
+    {
+      path: '/blog',
+      title: '博客'
+    },
+    {
+      path: '/message',
+      title: '留言'
+    },
+    {
+      path: '/dialy',
+      title: '日记'
+    },
+    {
+      path: '/work',
+      title: '个人作品'
+    },
+    // {
+    //   path: '/links',
+    //   title: '友链'
+    // },
+    {
+      path: '/about',
+      title: '关于'
+    }
+  ]
+  return list
+}

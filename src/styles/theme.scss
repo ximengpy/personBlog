@@ -2,3 +2,7 @@ $layoutHeaderBj: #fff;
 $layoutHeaderHeight: 60px;
 $basecolor: #00c2ff;
 $objectcolor: #6bc30d;
+
+@mixin moveTime {
+  transition: .3s;
+}

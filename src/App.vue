@@ -4,12 +4,12 @@
 import Head from './components/Layout/Head.vue'
 export default {
   components: {Head}
-
 }
 </script>
 
 <template>
   <Head />
+  <router-view />
 </template>
 
 <style>
