@@ -29,7 +29,7 @@
           <div class="web-nav-menu-left fright">
             <div class="product fbetween fvertical">
               <span>{{ hoverChild.childrenTitle }}</span>
-              <img class="icon" src="@/assets/web/icon-cloud.png" alt="">
+              <!-- <img class="icon" src="@/assets/web/icon-cloud.png" alt=""> -->
             </div>
           </div>
           <div class="web-nav-menu-right">
