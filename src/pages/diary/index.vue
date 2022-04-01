@@ -9,12 +9,14 @@
         :key="item._id"
       >
         <el-card>
-          <p>{{item.txt}}</p>
+          <p class="mgb_20">{{item.txt}}</p>
+          <div class="img-wrap" v-if="item.img"> 
             <img
-              v-if="item.img"
+              
               :src="item.img"
               :alt="item.txt"
               width="100%">
+          </div>
         </el-card>
       </el-timeline-item>
     </el-timeline>
@@ -56,6 +58,7 @@ export default {
   padding: 90px 0;
   width: 60%;
   margin: 0 auto;
+
 }
 @media screen and (max-width: 966px)  {
   .diary {
