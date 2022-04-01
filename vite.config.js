@@ -6,12 +6,14 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     port: 1220,
-    // proxy: {
-    //   target: 'http://localhost',
-    //   pathRewrite: {
-    //     '^/': '/'
-    //   }
-    // }
+    proxy: {
+      '/img' : {
+        target: 'http://localhost:3000',
+        pathRewrite: {
+          '^/': '/'
+        }
+      },
+    }
   },
 
   alias: {

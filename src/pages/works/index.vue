@@ -11,7 +11,7 @@
             @click="toDetail(item)"
             >
               <div class="item-img">
-                <img :src="defaultImg" alt="">
+                <img :src="item.img || defaultImg" alt="">
                 <p class="item-detail" @click="toDetail(item)">点击查看详情</p>
                 <div class="hover-item">
                   <h4 class="item-title">{{item.title}}</h4>

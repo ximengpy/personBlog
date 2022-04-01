@@ -3,7 +3,7 @@
 function moduleConfig() {
   const env = import.meta.env.MODE || 'prod'
   const api = {
-    'development': 'http://localhost:80/api',
+    'development': 'http://localhost:3000',
     'production': '/api'
   }
   return {
