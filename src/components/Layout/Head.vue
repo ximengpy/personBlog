@@ -15,7 +15,7 @@
         </div>
         <div class="flex mgr_40">
           <!-- <a class="nav-option-text fcc" :href="doctorCloud" target="_blank">博士云</a> -->
-          <router-link class="nav-option-btn fcc" to="/platform" v-show="isLogin">进入后台</router-link>
+          <!-- <router-link class="nav-option-btn fcc" to="/admin" v-show="isLogin">进入后台</router-link> -->
           <router-link class="nav-option-text fcc " to="/login" v-show="!isLogin">登录</router-link>
           <p v-show="isLogin" class="nav-option-btn fcc mgl_20" @click="logOut">退出</p>
           <!-- <el-button type=“primary” class="mgl_20" v-show="isLogin">退出</el-button> -->

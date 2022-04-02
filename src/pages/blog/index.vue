@@ -78,8 +78,8 @@
               <h3 class="visitor-title">最近访客</h3>
             <ul class="visitor-list">
               <li v-for="(item,index) in visitors " :key="index" class="visitor-item" >
-                <img  class="visitor-img" :src="item.photo" alt="">
-                <p class="visitor-name">{{item.user}}</p>
+                <img  class="visitor-img" src="../../assets/images/home/2.jpg" alt="">
+                <p class="visitor-name">{{item.user.user}}</p>
               </li>
             </ul>
           </div>

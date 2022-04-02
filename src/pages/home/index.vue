@@ -6,7 +6,10 @@
         <h3 class="sub-title">welcome to my blog</h3>
         <el-button class="btn" type="primary" @click="handleClickToblog">Enter blog</el-button>
       </div>
-      <i @click="handletoHot" class="el-icon-arrow-down bg-icon"></i>
+      <el-icon :size="20" @click="handletoHot">
+        <ArrowDownBold  />
+      </el-icon>
+      <!-- <i @click="handletoHot" class="el-icon-arrow-down bg-icon"></i> -->
     </div>
 
     <!-- 右上角菜单栏 -->
@@ -123,6 +126,9 @@ export default {
     /**获取热门文章 */
     async _getArticleHot() {
       const res = await getArticleHot(3)
+      if(!res.code) {
+        this.articleHotList = res.data
+      }
     }
   },
   destroyed() {

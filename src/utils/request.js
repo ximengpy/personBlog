@@ -83,7 +83,7 @@ function responseTip(status, info, showTip) {
       }
       if(info.code === 5) {
         //未登录
-        Global.info.resetUser()
+        Global.resetUser()
       }
       break;
   }

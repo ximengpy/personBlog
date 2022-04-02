@@ -36,6 +36,11 @@ const routers = [
     component: () => import('../pages/diary/index.vue')
   },
   {
+    name: 'message',
+    path: '/message',
+    component: () => import('../pages/message/index.vue')
+  },
+  {
     name: 'login',
     path: '/login',
     component: () => import('../pages/login/index.vue')
