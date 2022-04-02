@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "js-cookie": "^3.0.1",
     "sass": "^1.49.9",
     "sass-resources-loader": "^2.2.4",
     "vue": "^3.2.25"

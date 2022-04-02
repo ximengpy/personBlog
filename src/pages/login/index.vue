@@ -4,34 +4,51 @@
       <h2 class="login-title"> {{type === 1? '登录': '注册'}}</h2>
       <el-form
           ref="form"
-          :model="form"
+          :model="login"
           label-width="80px"
           :rules="rules"
       >
         <el-form-item label="用户名" prop="user">
-          <el-input v-model="form.user"></el-input>
+          <el-input v-model="login.user"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="pwd">
-          <el-input v-model="form.pwd" show-password></el-input>
+          <el-input v-model="login.pwd" show-password></el-input>
+        </el-form-item>
+        <el-form-item v-show="type === 2" label="验证码" prop="svgCode" class="vcode" >
+          <div class="fcc">
+            <el-input class="w_100" v-model="login.svgCode"></el-input>
+            <p   @click="getVCode" :disabled="login.disabled" v-html="login.svgText"></p>
+          </div>
+          <!-- <el-link type="primary" @click="getVCode" :disabled="login.disabled">{{login.refreshText}}</el-link> -->
         </el-form-item>
 
       </el-form>
-        <el-button
+        <div>
+          <el-button
           type="primary"
           @click="handleClick(1)"
           :disabled="submitDisabled"
           class="login-btn">登录</el-button>
           <el-button
+          v-if="type === 1"
           @click="handleClick(2)"
           :disabled="submitDisabled"
           class="login-btn">注册</el-button>
+          <el-button
+          v-else
+          @click="handleClick(3)"
+          :disabled="submitDisabled"
+          class="login-btn">确定注册</el-button>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
-import { login } from '@/api/user.js'
+import { login, getRegisterVcode ,postRegister } from '@/api/user.js'
 import { ElMessage } from 'element-plus'
+import { setCookie} from '@/utils/cookie'
+import Global from '@/store/Global'
   export default {
     name: "Login",
     inject:['reload'] ,
@@ -40,31 +57,68 @@ import { ElMessage } from 'element-plus'
         /**1: 登录 2: 注册 */
         type: 1,
         //表单数据
-        form :{
+        login :{
           user : "",
           pwd : "",
           // checkPwd : "",
-          svgCode : ""
+          svgCode : "",
+          svgText: '',
+          refreshText: '刷新',
+          disabled: false
         },
         submitDisabled:false,
         //表单验证
+        rules: []
       
       }
     },
-
     methods : {
       handleClick(type) {
-        this.type = type
-        this.type === 1? this.isLogin(): this.isRegister()
-      },
-      async isLogin() {
-        const res = await login(this.form)
-        if( !res.code) {
-          ElMessage.success('登录成功')
+        
+        switch(type) {
+          case 1: this.isLogin(); break;
+          case 2: this.isResiger(); break;
+          case 3: this.toRegister(); break;
         }
       },
-      isRegister() {
-        ElMessage.warning('敬请期待')
+      async isLogin() {
+        this.type = 1
+        const res = await login(this.login)
+        if( !res.code) {
+          ElMessage.success('登录成功')
+          setCookie('token', res.data.token)
+          Global.updateUser()
+        }
+      },
+      async toRegister() {
+        const res = await postRegister(this.login)
+        if( !res.code ) {
+          ElMessage.success('注册成功')
+          
+        }
+      },
+      getVCode(){
+        getRegisterVcode().then(res=>{
+          clearTimeout(this.login.timer);
+          let t = 0;
+          let fn = ()=>{
+            t += 1000;
+            if (t > res.time){
+              clearTimeout(this.login.timer);
+              this.login.refreshText = "刷新";
+            }else{
+              this.login.refreshText = (((res.time - t)/1000)|0) + "s后可以刷新";
+            }
+          };
+          this.login.timer = setInterval(fn,1000);
+          fn();
+          //更新图片
+          this.login.svgText = res.data;
+        });
+      },
+      isResiger() {
+        this.type = 2
+        this.getVCode()
       }
     },
 
@@ -128,6 +182,9 @@ import { ElMessage } from 'element-plus'
         
         // text-align: center;
       }
+    }
+    .w_100 {
+      width: 100px !important;
     }
   }
   @media screen and (max-width: 966px)  {

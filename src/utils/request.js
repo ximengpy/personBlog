@@ -2,7 +2,7 @@
 import axios from 'axios';
 import {ElMessage} from 'element-plus';
 import config from './config';
-// import { getToken } from './authorization';
+import { getToken } from './authorization';
 // import { restUserLoginInfo } from '@/api/login';
 import { checkType } from './index';
 
@@ -27,20 +27,20 @@ service.interceptors.request.use(async options => {
   //   }
   // }
   // 设置请求`token`
-  // const token = getToken() || '';
+  const token = getToken() || '';
   
-  // if (token) {
-  //   options.headers['Authorization'] = 'Bearer ' + token;
-  // } else {
-  //   /** 拦截必须要设置token标识接口路径列表 */
-  //   const proxyList = [
-  //     '/auth/token/currentUser',
-  //   ]
-  //   // console.log('options >>', options);
-  //   if (proxyList.includes(options.url)) {
-  //     options.headers['Authorization'] = 'Bearer ';
-  //   }
-  // }
+  if (token) {
+    options.headers['Authorization'] =token;
+  } else {
+    /** 拦截必须要设置token标识接口路径列表 */
+    // const proxyList = [
+    //   '/auth/token/currentUser',
+    // ]
+    // // console.log('options >>', options);
+    // if (proxyList.includes(options.url)) {
+    //   options.headers['Authorization'] = 'Bearer ';
+    // }
+  }
 
   // 没有在接口设置到`token`时，添加`token`
   // if (!options.headers['Authorization']) {
