@@ -5,7 +5,8 @@ const cacheName = 'blog-user'
 function userInfo() {
   return {
     user: '',
-    phone: ''
+    phone: '',
+    token: ''
   }
 }
 class ModulesStore {
@@ -24,6 +25,7 @@ class ModulesStore {
    */
     updateUser(value) {
       modifyData(this.info, value);
+      setCookie('token', value.token)
       // sessionStorage.setItem(cacheName, JSON.stringify(this.info));
       setCookie(cacheName, JSON.stringify(this.info));
     }
@@ -34,7 +36,8 @@ class ModulesStore {
   resetUser() {
     modifyData(this.info, userInfo());
     // sessionStorage.removeItem(cacheName);
-    removeCookie(cacheName, { domain: config.domain })
+    removeCookie(cacheName)
+    removeCookie('token')
   }
 }
 

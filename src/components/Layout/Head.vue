@@ -16,7 +16,9 @@
         <div class="flex mgr_40">
           <!-- <a class="nav-option-text fcc" :href="doctorCloud" target="_blank">博士云</a> -->
           <router-link class="nav-option-btn fcc" to="/platform" v-show="isLogin">进入后台</router-link>
-          <router-link class="nav-option-text fcc" to="/login" v-show="!isLogin">登录</router-link>
+          <router-link class="nav-option-text fcc " to="/login" v-show="!isLogin">登录</router-link>
+          <p v-show="isLogin" class="nav-option-btn fcc mgl_20" @click="logOut">退出</p>
+          <!-- <el-button type=“primary” class="mgl_20" v-show="isLogin">退出</el-button> -->
           <!-- <router-link class="nav-option-btn fcc mgl_20" to="/login?type=register" v-show="!isLogin">免费注册</router-link> -->
         </div>
       </div>
@@ -69,8 +71,12 @@
 </template>
 <script>
 import { useNavList } from '../../utils/hook';
-// import { getToken } from '@/utils/authorization';
+import Global from '@/store/Global'
+import { ElMessage } from 'element-plus'
+
+import { getToken } from '@/utils/authorization';
 import config from '@/utils/config';
+import { loginOut } from '@/api/user'
 
 /**
  * 官网-导航组件
@@ -80,9 +86,10 @@ export default {
   components: {},
   data() {
     return {
+      isLogin: '',
+      userInfo: Global.info,
       doctorCloud: config.doctorCloud,
       navList: useNavList(),
-      isLogin: false,
       showChildMenu: false,
       /**
        * `hover`状态`item`信息
@@ -93,7 +100,18 @@ export default {
       isScroll: false,
     }
   },
+  watch: {
+    'userInfo.token': {
+      handler(val) {
+        this.isLogin = !! val.token
+      },
+      immediate: true
+    }
+  },
   computed: {
+    // isLogin() {
+    //   return !!getToken()
+    // },
     activeItem() {
       const currentPath = this.$route.path;
       let info = {};
@@ -134,7 +152,7 @@ export default {
     }
   },
   mounted() {
-    this.isLogin = false
+    this.isLogin = !! this.userInfo.token
     const THAT = this;
     function onScroll() {
       const rootNode = document.body.scrollTop === 0 ? document.documentElement : document.body;
@@ -171,6 +189,11 @@ export default {
     },
     onLeave() {
       this.showChildMenu = false;
+    },
+    logOut() {
+        Global.resetUser()
+        ElMessage.success("退出成功")
+        this.isLogin = !!getToken()
     }
     // ==================================== 二、数据请求类 ================================
 
@@ -419,5 +442,8 @@ export default {
 }
 .web-nav-top-scroll {
   @include topHover();
+}
+.mgl_20 {
+  margin-left: 20px;
 }
 </style>

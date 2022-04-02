@@ -5,6 +5,7 @@ import config from './config';
 import { getToken } from './authorization';
 // import { restUserLoginInfo } from '@/api/login';
 import { checkType } from './index';
+import Global from '../store/Global'
 
 const service = axios.create({
   baseURL: config.apiUrl,
@@ -79,6 +80,10 @@ function responseTip(status, info, showTip) {
     case 200:
       if (info.code !== 0) {
         ElMessage.warning(info.msg || "操作失败")
+      }
+      if(info.code === 5) {
+        //未登录
+        Global.info.resetUser()
       }
       break;
   }

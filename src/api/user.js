@@ -13,3 +13,7 @@ export function getRegisterVcode(options) {
 export function postRegister(options) {
   return request('POST', '/register', options, {showTip: true})
 }
+
+export function loginOut() {
+  return request('POST', '/login/logout', {}, {showTip: true})
+}

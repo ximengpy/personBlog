@@ -47,8 +47,11 @@
 <script>
 import { login, getRegisterVcode ,postRegister } from '@/api/user.js'
 import { ElMessage } from 'element-plus'
-import { setCookie} from '@/utils/cookie'
+import { setCookie,} from '@/utils/cookie'
 import Global from '@/store/Global'
+import { getToken } from '@/utils/authorization';
+import { getCookie } from '../../utils/cookie'
+
   export default {
     name: "Login",
     inject:['reload'] ,
@@ -86,8 +89,8 @@ import Global from '@/store/Global'
         const res = await login(this.login)
         if( !res.code) {
           ElMessage.success('登录成功')
-          setCookie('token', res.data.token)
-          Global.updateUser()
+          Global.updateUser(res.data)
+          this.$router.push( '/')
         }
       },
       async toRegister() {
@@ -123,6 +126,10 @@ import Global from '@/store/Global'
     },
 
     mounted() {
+      const token = !! getToken()
+      if( token) {
+        this.$router.push('/');
+      }
     },
     destroyed() {
     }
